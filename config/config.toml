@@ -1,0 +1,8 @@
+[log]
+level = "debug"
+
+[tailscale]
+socket = "/var/run/tailscaled.sock"
+
+[docker]
+endpoint = "/var/run/docker.sock"
