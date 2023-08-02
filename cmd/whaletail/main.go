@@ -4,6 +4,7 @@ import (
 	"net/netip"
 	"os"
 	"os/signal"
+	"syscall"
 
 	"github.com/willfantom/whaletail/pkg/config"
 	"github.com/willfantom/whaletail/pkg/docker"
@@ -22,7 +23,7 @@ func main() {
 	configWatcher := config.Listen()
 
 	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt)
+	signal.Notify(c, os.Interrupt, os.Kill, syscall.SIGTERM)
 
 	wt := &Whaletail{
 		tailscaleClient:  &tailscale.Client{},
